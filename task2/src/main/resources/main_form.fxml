@@ -8,21 +8,17 @@
           fx:controller="com.github.pinkolik.lab3.task2.controller.Controller"
           prefHeight="400.0" prefWidth="600.0" hgap="10" vgap="10" alignment="CENTER">
     <columnConstraints>
-        <ColumnConstraints hgrow="ALWAYS" percentWidth="33.3" minWidth="10.0"/>
-        <ColumnConstraints hgrow="ALWAYS" percentWidth="33.3" minWidth="10.0"/>
-        <ColumnConstraints hgrow="ALWAYS" percentWidth="33.3" minWidth="10.0"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="50" minWidth="10.0"/>
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="50" minWidth="10.0"/>
     </columnConstraints>
-    <Text text="Key:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-    <TextField fx:id="keyTextField" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+    <TextField fx:id="keyTextField" text="Enter key here" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
     <TextArea fx:id="decryptedTextArea" text="Enter your message" GridPane.rowIndex="1" GridPane.columnIndex="0"
-              GridPane.columnSpan="3"/>
-    <TextArea fx:id="encryptedTextArea" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="3"/>
-    <Button fx:id="generateKeysButton" text="Generate Keys" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="3"
+              GridPane.columnSpan="2"/>
+    <TextArea fx:id="encryptedTextArea" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Button fx:id="generateKeysButton" text="Generate Keys" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"
             onMouseClicked="#onGenerateKeysButton" prefWidth="Infinity"/>
     <Button fx:id="encodeButton" text="Encode" GridPane.rowIndex="4" GridPane.columnIndex="0"
             onMouseClicked="#onEncodeButtonClicked" prefWidth="Infinity"/>
     <Button fx:id="decodeButton" text="Decode" GridPane.rowIndex="4" GridPane.columnIndex="1"
             onMouseClicked="#onDecodeButtonClicked" prefWidth="Infinity"/>
-    <Button fx:id="findKeyButton" text="Find key" GridPane.rowIndex="4" GridPane.columnIndex="2"
-            onMouseClicked="#findKeyButtonClicked" prefWidth="Infinity"/>
 </GridPane>
