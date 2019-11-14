@@ -3,6 +3,8 @@ package com.github.pinkolik.lab3.common.keygen;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /*
  * Первый байт ключа - его ключ.
@@ -22,7 +24,7 @@ import java.util.Random;
 public class AlternateXorKeyGenerator implements IKeyGenerator {
 
     public List<byte[]> generateEquivalentKeys(final byte[] originalKey, final int count) {
-        return null;
+        return IntStream.range(0, count - 1).mapToObj(i -> generateEquivalentKey(originalKey)).collect(Collectors.toList());
     }
 
     public byte[] decryptKey(final byte[] encryptedKey) {
