@@ -1,6 +1,5 @@
 package com.github.pinkolik.lab3.task1.controller;
 
-import com.github.pinkolik.lab3.common.crypto.CryptoHelper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -8,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.io.UnsupportedEncodingException;
+
+import static com.github.pinkolik.lab3.common.crypto.CryptoHelper.*;
 
 public class Controller {
 
@@ -42,7 +43,7 @@ public class Controller {
         encryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = decryptedTextArea.getText();
-        encryptedTextArea.setText(CryptoHelper.encrypt(key, message));
+        encryptedTextArea.setText(bytesToHex(encrypt(hexStringToBytes(key), message.getBytes("windows-1251"))));
     }
 
     @FXML
@@ -50,7 +51,7 @@ public class Controller {
         decryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = encryptedTextArea.getText();
-        decryptedTextArea.setText(CryptoHelper.decrypt(key, message));
+        decryptedTextArea.setText(new String(decrypt(hexStringToBytes(key), message.getBytes("windows-1251")), "windows-1251"));
     }
 
     @FXML
@@ -58,6 +59,7 @@ public class Controller {
         fittingKeyTextField.clear();
         String encryptedMessage = encryptedTextArea.getText();
         String decryptedMessage = decryptedTextArea.getText();
-        fittingKeyTextField.setText(CryptoHelper.findFittingKey(encryptedMessage, decryptedMessage));
+        fittingKeyTextField.setText(
+                bytesToHex(findFittingKey(hexStringToBytes(encryptedMessage), decryptedMessage.getBytes("windows-1251"))));
     }
 }

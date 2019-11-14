@@ -42,22 +42,23 @@ public class AlternateXorKeyGenerator implements IKeyGenerator {
                     resultByte = (byte) (originalByte ^ key);
                 }
                 else {
-
+                    resultByte = reverseXor(key, originalByte);
                 }
             }
             else {
                 if (isOdd) {
-
+                    resultByte = reverseXor(key, originalByte);
                 }
                 else {
-
+                    resultByte = (byte) (originalByte ^ key);
                 }
             }
+            result[i + 1] = resultByte;
         }
         return result;
     }
 
     private byte reverseXor(final byte firstByte, final byte secondByte) {
-        return 0;
+        return (byte) (((firstByte >>> 4) ^ (secondByte & 0x0F)) | ((firstByte << 4) ^ (secondByte & 0xF0)));
     }
 }

@@ -1,32 +1,12 @@
 package com.github.pinkolik.lab3.common.crypto;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Random;
 
 public final class CryptoHelper {
 
-    public static String encrypt(final String key, final String message) throws UnsupportedEncodingException {
-        final byte[] keyBytes = hexStringToBytes(key.replace(" ", ""));
-        final byte[] messageBytes = message.getBytes("windows-1251");
-        return bytesToHex(applyXor(keyBytes, messageBytes));
-    }
-
-    private static byte[] hexStringToBytes(final String key) {
-        int length = key.length();
-        byte[] result = new byte[length / 2];
-        for (int i = 0; i < length; i += 2) {
-            result[i / 2] = (byte) ((Character.digit(key.charAt(i), 16) << 4) + Character.digit(key.charAt(i + 1), 16));
-        }
-        return result;
-    }
-
-    private static String bytesToHex(final byte[] hashInBytes) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (byte b : hashInBytes) {
-            stringBuilder.append(String.format("%02x", b).toUpperCase()).append(" ");
-        }
-        return stringBuilder.toString();
-
+    public static byte[] encrypt(final byte[] key, final byte[] message) {
+        return applyXor(key, message);
     }
 
     private static byte[] applyXor(final byte[] keyBytes, final byte[] messageBytes) {
@@ -38,16 +18,37 @@ public final class CryptoHelper {
         return resultBytes;
     }
 
-    public static String decrypt(final String key, final String message) throws UnsupportedEncodingException {
-        final byte[] keyBytes = hexStringToBytes(key.replace(" ", ""));
-        final byte[] messageBytes = hexStringToBytes(message.replace(" ", ""));
-        return new String(applyXor(keyBytes, messageBytes), "windows-1251");
+    public static byte[] hexStringToBytes(final String hexString) {
+        String hexStringWithoutSpaces = hexString.replace(" ", "");
+        int length = hexStringWithoutSpaces.length();
+        byte[] result = new byte[length / 2];
+        for (int i = 0; i < length; i += 2) {
+            result[i / 2] = (byte) ((Character.digit(hexStringWithoutSpaces.charAt(i), 16) << 4) +
+                    Character.digit(hexStringWithoutSpaces.charAt(i + 1), 16));
+        }
+        return result;
     }
 
-    public static String findFittingKey(final String encryptedMessage, final String decryptedMessage)
-            throws UnsupportedEncodingException {
-        final byte[] encryptedMessageBytes = hexStringToBytes(encryptedMessage.replace(" ", ""));
-        final byte[] decryptedMessageBytes = decryptedMessage.getBytes("windows-1251");
-        return bytesToHex(applyXor(encryptedMessageBytes, decryptedMessageBytes));
+    public static String bytesToHex(final byte[] hashInBytes) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (byte b : hashInBytes) {
+            stringBuilder.append(String.format("%02x", b).toUpperCase()).append(" ");
+        }
+        return stringBuilder.toString();
+    }
+
+    public static byte[] decrypt(final byte[] key, final byte[] message) {
+        return applyXor(key, message);
+    }
+
+    public static byte[] findFittingKey(final byte[] encryptedMessage, final byte[] decryptedMessage) {
+        return applyXor(encryptedMessage, decryptedMessage);
+    }
+
+    public static byte[] generateRandomKey(final byte[] message) {
+        final byte[] keyBytes = new byte[message.length];
+        Random random = new Random();
+        random.nextBytes(keyBytes);
+        return keyBytes;
     }
 }
