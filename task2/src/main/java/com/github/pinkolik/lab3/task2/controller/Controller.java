@@ -4,6 +4,7 @@ import com.github.pinkolik.lab3.common.crypto.CryptoHelper;
 import com.github.pinkolik.lab3.common.keygen.AlternateXorKeyGenerator;
 import com.github.pinkolik.lab3.common.keygen.IKeyGenerator;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +24,9 @@ public class Controller {
 
     @FXML
     public TextArea encryptedTextArea;
+
+    @FXML
+    public ComboBox keyGeneratorsComboBox;
 
     @FXML
     public void onEncodeButtonClicked(final MouseEvent mouseEvent) {

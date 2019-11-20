@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.github.pinkolik.lab3.task2.controller.Controller"
@@ -11,14 +10,19 @@
         <ColumnConstraints hgrow="ALWAYS" percentWidth="50" minWidth="10.0"/>
         <ColumnConstraints hgrow="ALWAYS" percentWidth="50" minWidth="10.0"/>
     </columnConstraints>
-    <TextField fx:id="keyTextField" text="Enter key here" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-    <TextArea fx:id="decryptedTextArea" text="Enter your message" GridPane.rowIndex="1" GridPane.columnIndex="0"
-              GridPane.columnSpan="2"/>
-    <TextArea fx:id="encryptedTextArea" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-    <Button fx:id="generateKeysButton" text="Generate Keys" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"
-            onMouseClicked="#onGenerateKeysButton" prefWidth="Infinity"/>
-    <Button fx:id="encodeButton" text="Encode" GridPane.rowIndex="4" GridPane.columnIndex="0"
-            onMouseClicked="#onEncodeButtonClicked" prefWidth="Infinity"/>
-    <Button fx:id="decodeButton" text="Decode" GridPane.rowIndex="4" GridPane.columnIndex="1"
-            onMouseClicked="#onDecodeButtonClicked" prefWidth="Infinity"/>
+    <children>
+        <ComboBox fx:id="keyGeneratorsComboBox" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2" prefWidth="Infinity"/>
+        <TextField fx:id="keyTextField" text="Enter key here" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                   GridPane.columnSpan="2"/>
+        <TextArea fx:id="decryptedTextArea" text="Enter your message" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                  GridPane.columnSpan="2"/>
+        <TextArea fx:id="encryptedTextArea" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+        <Button fx:id="generateKeysButton" text="Generate Keys" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                GridPane.columnSpan="2"
+                onMouseClicked="#onGenerateKeysButton" prefWidth="Infinity"/>
+        <Button fx:id="encodeButton" text="Encode" GridPane.rowIndex="5" GridPane.columnIndex="0"
+                onMouseClicked="#onEncodeButtonClicked" prefWidth="Infinity"/>
+        <Button fx:id="decodeButton" text="Decode" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                onMouseClicked="#onDecodeButtonClicked" prefWidth="Infinity"/>
+    </children>
 </GridPane>

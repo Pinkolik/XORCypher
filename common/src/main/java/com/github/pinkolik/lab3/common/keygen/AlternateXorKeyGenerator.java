@@ -27,11 +27,8 @@ public class AlternateXorKeyGenerator implements IKeyGenerator {
         return IntStream.range(0, count - 1).mapToObj(i -> generateEquivalentKey(originalKey)).collect(Collectors.toList());
     }
 
-    public byte[] decryptKey(final byte[] encryptedKey) {
-        return new byte[0];
-    }
-
-    private byte[] generateEquivalentKey(final byte[] originalKey) {
+    @Override
+    public byte[] generateEquivalentKey(final byte[] originalKey) {
         final byte key = (byte) new Random().nextInt();
         final byte[] result = new byte[originalKey.length + 1];
         result[0] = key;
@@ -58,6 +55,15 @@ public class AlternateXorKeyGenerator implements IKeyGenerator {
             result[i + 1] = resultByte;
         }
         return result;
+    }
+
+    public byte[] decryptKey(final byte[] encryptedKey) {
+        return new byte[0];
+    }
+
+    @Override
+    public String getName() {
+        return "Alternate Xor Key Generator";
     }
 
     private byte reverseXor(final byte firstByte, final byte secondByte) {

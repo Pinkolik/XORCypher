@@ -6,5 +6,9 @@ public interface IKeyGenerator {
 
     List<byte[]> generateEquivalentKeys(byte[] originalKey, int count);
 
+    byte[] generateEquivalentKey(byte[] originalKey);
+
     byte[] decryptKey(byte[] encryptedKey);
+
+    String getName();
 }
