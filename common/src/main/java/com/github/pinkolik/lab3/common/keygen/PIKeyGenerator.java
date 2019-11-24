@@ -36,8 +36,8 @@ public class PIKeyGenerator extends AbstractKeyGenerator {
         final byte key = encryptedKey[0];
         final List<Byte> result = new ArrayList<>();
         for (byte i = 1; i < encryptedKey.length - 1; i += 2) {
-            byte lowByteOffset = encryptedKey[i];
-            byte highByteOffset = encryptedKey[i + 1];
+            int lowByteOffset = encryptedKey[i];
+            int highByteOffset = encryptedKey[i + 1];
             byte lowByte = PIUtil.computePiNthDigit(key + lowByteOffset);
             byte highByte = (byte) (PIUtil.computePiNthDigit(key + highByteOffset) << 4);
             result.add((byte) (lowByte | highByte));
