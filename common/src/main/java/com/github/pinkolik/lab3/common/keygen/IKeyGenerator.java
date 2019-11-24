@@ -9,6 +9,4 @@ public interface IKeyGenerator {
     byte[] generateEquivalentKey(byte[] originalKey);
 
     byte[] decryptKey(byte[] encryptedKey);
-
-    String getName();
 }

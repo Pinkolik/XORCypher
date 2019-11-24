@@ -29,7 +29,7 @@ public final class CryptoHelper {
         return result;
     }
 
-    public static String bytesToHex(final byte[] hashInBytes) {
+    public static String bytesToHexString(final byte[] hashInBytes) {
         StringBuilder stringBuilder = new StringBuilder();
         for (byte b : hashInBytes) {
             stringBuilder.append(String.format("%02x", b).toUpperCase()).append(" ");

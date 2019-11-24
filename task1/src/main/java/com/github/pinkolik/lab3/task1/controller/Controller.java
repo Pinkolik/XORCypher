@@ -1,7 +1,6 @@
 package com.github.pinkolik.lab3.task1.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -13,25 +12,16 @@ import static com.github.pinkolik.lab3.common.crypto.CryptoHelper.*;
 public class Controller {
 
     @FXML
-    public TextField keyTextField;
+    private TextField keyTextField;
 
     @FXML
-    public TextField fittingKeyTextField;
+    private TextField fittingKeyTextField;
 
     @FXML
-    public TextArea decryptedTextArea;
+    private TextArea decryptedTextArea;
 
     @FXML
-    public TextArea encryptedTextArea;
-
-    @FXML
-    public Button encodeButton;
-
-    @FXML
-    public Button decodeButton;
-
-    @FXML
-    public Button findKeyButton;
+    private TextArea encryptedTextArea;
 
     @FXML
     public void initialize() {
@@ -43,7 +33,7 @@ public class Controller {
         encryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = decryptedTextArea.getText();
-        encryptedTextArea.setText(bytesToHex(encrypt(hexStringToBytes(key), message.getBytes("windows-1251"))));
+        encryptedTextArea.setText(bytesToHexString(encrypt(hexStringToBytes(key), message.getBytes("windows-1251"))));
     }
 
     @FXML
@@ -60,6 +50,6 @@ public class Controller {
         String encryptedMessage = encryptedTextArea.getText();
         String decryptedMessage = decryptedTextArea.getText();
         fittingKeyTextField.setText(
-                bytesToHex(findFittingKey(hexStringToBytes(encryptedMessage), decryptedMessage.getBytes("windows-1251"))));
+                bytesToHexString(findFittingKey(hexStringToBytes(encryptedMessage), decryptedMessage.getBytes("windows-1251"))));
     }
 }
