@@ -8,9 +8,10 @@ package com.github.pinkolik.lab3.common.keygen;
  */
 public final class KeyGeneratorStorage {
 
-    private static final IKeyGenerator[] KEY_GENERATORS = new IKeyGenerator[] {new AlternateXorKeyGenerator()};
+    private static final AbstractKeyGenerator[] KEY_GENERATORS =
+            new AbstractKeyGenerator[] {new AlternateXorKeyGenerator(), new PIKeyGenerator()};
 
-    public static IKeyGenerator[] getKeyGenerators() {
+    public static AbstractKeyGenerator[] getKeyGenerators() {
         return KEY_GENERATORS;
     }
 }

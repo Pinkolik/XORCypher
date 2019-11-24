@@ -1,7 +1,7 @@
 package com.github.pinkolik.lab3.task2.controller;
 
 import com.github.pinkolik.lab3.common.crypto.CryptoHelper;
-import com.github.pinkolik.lab3.common.keygen.IKeyGenerator;
+import com.github.pinkolik.lab3.common.keygen.AbstractKeyGenerator;
 import com.github.pinkolik.lab3.common.keygen.KeyGeneratorStorage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -33,13 +33,13 @@ public class Controller {
     private TextArea encryptedTextArea;
 
     @FXML
-    private ComboBox<IKeyGenerator> keyGeneratorsComboBox;
+    private ComboBox<AbstractKeyGenerator> keyGeneratorsComboBox;
 
     @FXML
     public void onEncryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         byte[] messageBytes = decryptedTextArea.getText().getBytes(DEFAULT_CHARSET);
         byte[] encryptedKey = hexStringToBytes(keyTextField.getText());
-        IKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
+        AbstractKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
         byte[] originalKey = keyGenerator.decryptKey(encryptedKey);
         byte[] encryptedMessage = encrypt(originalKey, messageBytes);
         encryptedTextArea.setText(bytesToHexString(encryptedMessage));
@@ -49,7 +49,7 @@ public class Controller {
     public void onDecryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         byte[] encryptedMessageBytes = hexStringToBytes(encryptedTextArea.getText());
         byte[] encryptedKey = hexStringToBytes(keyTextField.getText());
-        IKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
+        AbstractKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
         byte[] originalKey = keyGenerator.decryptKey(encryptedKey);
         byte[] encryptedMessage = decrypt(originalKey, encryptedMessageBytes);
         decryptedTextArea.setText(new String(encryptedMessage, DEFAULT_CHARSET));
@@ -59,8 +59,8 @@ public class Controller {
     public void onGenerateKeysButton(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         byte[] messageBytes = decryptedTextArea.getText().getBytes(DEFAULT_CHARSET);
         byte[] originalKey = generateRandomKey(messageBytes);
-        IKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
-        List<byte[]> generatedKeys = keyGenerator.generateEquivalentKeys(originalKey, 10);
+        AbstractKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
+        List<byte[]> generatedKeys = keyGenerator.generateEquivalentKeys(originalKey, 20);
         FileChooser fileChooser = new FileChooser();
         File saveFile = fileChooser.showSaveDialog(null);
         try {

@@ -1,10 +1,7 @@
 package com.github.pinkolik.lab3.common.keygen;
 
 
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /*
  * Первый байт ключа - его ключ.
@@ -21,12 +18,7 @@ import java.util.stream.IntStream;
  * Байт, идущий следующим после ключа считать нулевым, то есть,
  * чётным.
  * */
-public class AlternateXorKeyGenerator implements IKeyGenerator {
-
-    @Override
-    public List<byte[]> generateEquivalentKeys(final byte[] originalKey, final int count) {
-        return IntStream.range(0, count).mapToObj(i -> generateEquivalentKey(originalKey)).collect(Collectors.toList());
-    }
+public class AlternateXorKeyGenerator extends AbstractKeyGenerator {
 
     @Override
     public byte[] generateEquivalentKey(final byte[] originalKey) {
