@@ -17,9 +17,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import static com.github.pinkolik.lab3.common.crypto.CryptoHelper.generateRandomKey;
+import static com.github.pinkolik.lab3.common.crypto.CryptoHelper.*;
 
 public class Controller {
+
+    private static final String DEFAULT_CHARSET = "windows-1251";
 
     @FXML
     private TextField keyTextField;
@@ -34,24 +36,37 @@ public class Controller {
     private ComboBox<IKeyGenerator> keyGeneratorsComboBox;
 
     @FXML
-    public void onEncodeButtonClicked(final MouseEvent mouseEvent) {
-
+    public void onEncryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+        byte[] messageBytes = decryptedTextArea.getText().getBytes(DEFAULT_CHARSET);
+        byte[] encryptedKey = hexStringToBytes(keyTextField.getText());
+        IKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
+        byte[] originalKey = keyGenerator.decryptKey(encryptedKey);
+        byte[] encryptedMessage = encrypt(originalKey, messageBytes);
+        encryptedTextArea.setText(bytesToHexString(encryptedMessage));
     }
 
     @FXML
-    public void onDecodeButtonClicked(final MouseEvent mouseEvent) {
-
+    public void onDecryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+        byte[] encryptedMessageBytes = hexStringToBytes(encryptedTextArea.getText());
+        byte[] encryptedKey = hexStringToBytes(keyTextField.getText());
+        IKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
+        byte[] originalKey = keyGenerator.decryptKey(encryptedKey);
+        byte[] encryptedMessage = decrypt(originalKey, encryptedMessageBytes);
+        decryptedTextArea.setText(new String(encryptedMessage, DEFAULT_CHARSET));
     }
 
     @FXML
     public void onGenerateKeysButton(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
-        byte[] messageBytes = decryptedTextArea.getText().getBytes("windows-1251");
+        byte[] messageBytes = decryptedTextArea.getText().getBytes(DEFAULT_CHARSET);
         byte[] originalKey = generateRandomKey(messageBytes);
         IKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
         List<byte[]> generatedKeys = keyGenerator.generateEquivalentKeys(originalKey, 10);
         FileChooser fileChooser = new FileChooser();
         File saveFile = fileChooser.showSaveDialog(null);
         try {
+            if (saveFile == null) {
+                return;
+            }
             saveKeys(saveFile, generatedKeys);
         }
         catch (IOException e) {

@@ -20,8 +20,8 @@
     <Button fx:id="generateKeysButton" text="Generate Keys" GridPane.rowIndex="4" GridPane.columnIndex="0"
             GridPane.columnSpan="2"
             onMouseClicked="#onGenerateKeysButton" prefWidth="Infinity"/>
-    <Button fx:id="encodeButton" text="Encode" GridPane.rowIndex="5" GridPane.columnIndex="0"
-            onMouseClicked="#onEncodeButtonClicked" prefWidth="Infinity"/>
-    <Button fx:id="decodeButton" text="Decode" GridPane.rowIndex="5" GridPane.columnIndex="1"
-            onMouseClicked="#onDecodeButtonClicked" prefWidth="Infinity"/>
+    <Button fx:id="encryptButton" text="Encrypt" GridPane.rowIndex="5" GridPane.columnIndex="0"
+            onMouseClicked="#onEncryptButtonClicked" prefWidth="Infinity"/>
+    <Button fx:id="decryptButton" text="Decrypt" GridPane.rowIndex="5" GridPane.columnIndex="1"
+            onMouseClicked="#onDecryptButtonClicked" prefWidth="Infinity"/>
 </GridPane>

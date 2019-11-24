@@ -11,6 +11,8 @@ import static com.github.pinkolik.lab3.common.crypto.CryptoHelper.*;
 
 public class Controller {
 
+    private static final String DEFAULT_CHARSET = "windows-1251";
+
     @FXML
     private TextField keyTextField;
 
@@ -33,7 +35,7 @@ public class Controller {
         encryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = decryptedTextArea.getText();
-        encryptedTextArea.setText(bytesToHexString(encrypt(hexStringToBytes(key), message.getBytes("windows-1251"))));
+        encryptedTextArea.setText(bytesToHexString(encrypt(hexStringToBytes(key), message.getBytes(DEFAULT_CHARSET))));
     }
 
     @FXML
@@ -41,7 +43,7 @@ public class Controller {
         decryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = encryptedTextArea.getText();
-        decryptedTextArea.setText(new String(decrypt(hexStringToBytes(key), message.getBytes("windows-1251")), "windows-1251"));
+        decryptedTextArea.setText(new String(decrypt(hexStringToBytes(key), message.getBytes(DEFAULT_CHARSET)), DEFAULT_CHARSET));
     }
 
     @FXML
@@ -50,6 +52,6 @@ public class Controller {
         String encryptedMessage = encryptedTextArea.getText();
         String decryptedMessage = decryptedTextArea.getText();
         fittingKeyTextField.setText(
-                bytesToHexString(findFittingKey(hexStringToBytes(encryptedMessage), decryptedMessage.getBytes("windows-1251"))));
+                bytesToHexString(findFittingKey(hexStringToBytes(encryptedMessage), decryptedMessage.getBytes(DEFAULT_CHARSET))));
     }
 }
