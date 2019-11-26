@@ -43,7 +43,7 @@ public class Controller {
         decryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = encryptedTextArea.getText();
-        decryptedTextArea.setText(new String(decrypt(hexStringToBytes(key), message.getBytes(DEFAULT_CHARSET)), DEFAULT_CHARSET));
+        decryptedTextArea.setText(new String(decrypt(hexStringToBytes(key), hexStringToBytes(message)), DEFAULT_CHARSET));
     }
 
     @FXML
