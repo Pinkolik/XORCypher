@@ -5,7 +5,7 @@
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.github.pinkolik.lab3.task2.controller.Controller"
-          prefHeight="400.0" prefWidth="600.0" hgap="10" vgap="10" alignment="CENTER">
+          prefHeight="500.0" prefWidth="700.0" hgap="10" vgap="10" alignment="CENTER">
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" percentWidth="50" minWidth="10.0"/>
         <ColumnConstraints hgrow="ALWAYS" percentWidth="50" minWidth="10.0"/>
@@ -14,14 +14,16 @@
               prefWidth="Infinity"/>
     <TextField fx:id="keyTextField" text="Enter key here" GridPane.rowIndex="1" GridPane.columnIndex="0"
                GridPane.columnSpan="2"/>
-    <TextArea fx:id="decryptedTextArea" text="Enter your message" GridPane.rowIndex="2" GridPane.columnIndex="0"
+    <TextField fx:id="masterKeyTextField" text="Master Key:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+               GridPane.columnSpan="2" editable="false"/>
+    <TextArea fx:id="decryptedTextArea" text="Enter your message" GridPane.rowIndex="3" GridPane.columnIndex="0"
               GridPane.columnSpan="2"/>
-    <TextArea fx:id="encryptedTextArea" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-    <Button fx:id="generateKeysButton" text="Generate Keys" GridPane.rowIndex="4" GridPane.columnIndex="0"
+    <TextArea fx:id="encryptedTextArea" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Button fx:id="generateKeysButton" text="Generate Keys" GridPane.rowIndex="5" GridPane.columnIndex="0"
             GridPane.columnSpan="2"
             onMouseClicked="#onGenerateKeysButton" prefWidth="Infinity"/>
-    <Button fx:id="encryptButton" text="Encrypt" GridPane.rowIndex="5" GridPane.columnIndex="0"
+    <Button fx:id="encryptButton" text="Encrypt" GridPane.rowIndex="6" GridPane.columnIndex="0"
             onMouseClicked="#onEncryptButtonClicked" prefWidth="Infinity"/>
-    <Button fx:id="decryptButton" text="Decrypt" GridPane.rowIndex="5" GridPane.columnIndex="1"
+    <Button fx:id="decryptButton" text="Decrypt" GridPane.rowIndex="6" GridPane.columnIndex="1"
             onMouseClicked="#onDecryptButtonClicked" prefWidth="Infinity"/>
 </GridPane>

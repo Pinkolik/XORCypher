@@ -24,6 +24,9 @@ public class Controller {
     private static final String DEFAULT_CHARSET = "windows-1251";
 
     @FXML
+    public TextField masterKeyTextField;
+
+    @FXML
     private TextField keyTextField;
 
     @FXML
@@ -36,27 +39,29 @@ public class Controller {
     private ComboBox<AbstractKeyGenerator> keyGeneratorsComboBox;
 
     @FXML
-    public void onEncryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+    private void onEncryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         byte[] messageBytes = decryptedTextArea.getText().getBytes(DEFAULT_CHARSET);
         byte[] encryptedKey = hexStringToBytes(keyTextField.getText());
         AbstractKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
         byte[] originalKey = keyGenerator.decryptKey(encryptedKey);
         byte[] encryptedMessage = encrypt(originalKey, messageBytes);
+        masterKeyTextField.setText("Master Key: " + bytesToHexString(originalKey));
         encryptedTextArea.setText(bytesToHexString(encryptedMessage));
     }
 
     @FXML
-    public void onDecryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+    private void onDecryptButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         byte[] encryptedMessageBytes = hexStringToBytes(encryptedTextArea.getText());
         byte[] encryptedKey = hexStringToBytes(keyTextField.getText());
         AbstractKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
         byte[] originalKey = keyGenerator.decryptKey(encryptedKey);
         byte[] encryptedMessage = decrypt(originalKey, encryptedMessageBytes);
+        masterKeyTextField.setText("Master Key: " + bytesToHexString(originalKey));
         decryptedTextArea.setText(new String(encryptedMessage, DEFAULT_CHARSET));
     }
 
     @FXML
-    public void onGenerateKeysButton(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+    private void onGenerateKeysButton(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         byte[] messageBytes = decryptedTextArea.getText().getBytes(DEFAULT_CHARSET);
         byte[] originalKey = generateRandomKey(messageBytes);
         AbstractKeyGenerator keyGenerator = keyGeneratorsComboBox.getValue();
@@ -68,6 +73,7 @@ public class Controller {
                 return;
             }
             saveKeys(saveFile, generatedKeys);
+            masterKeyTextField.setText("Master Key: " + bytesToHexString(originalKey));
         }
         catch (IOException e) {
             showException(e);

@@ -31,7 +31,7 @@ public class Controller {
     }
 
     @FXML
-    public void onEncodeButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+    private void onEncodeButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         encryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = decryptedTextArea.getText();
@@ -39,7 +39,7 @@ public class Controller {
     }
 
     @FXML
-    public void onDecodeButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+    private void onDecodeButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         decryptedTextArea.clear();
         String key = keyTextField.getText();
         String message = encryptedTextArea.getText();
@@ -47,7 +47,7 @@ public class Controller {
     }
 
     @FXML
-    public void findKeyButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
+    private void findKeyButtonClicked(final MouseEvent mouseEvent) throws UnsupportedEncodingException {
         fittingKeyTextField.clear();
         String encryptedMessage = encryptedTextArea.getText();
         String decryptedMessage = decryptedTextArea.getText();
